@@ -1,0 +1,36 @@
+
+<div class = "container">
+<form [formGroup] = "formName">
+ 
+  <div class="form-row">
+    <div class="col-md-4">
+ <div *ngIf="!formName.controls['username'].valid && !formName.controls['username'].touched" class="alert alert-danger isInvalid">
+	   <div *ngIf="!formName.controls['username'].errors.minlength">
+          Sorry, username not long enough!
+		</div>
+
+
+
+
+ </div>
+     <input type="text" class="form-control" placeholder="First name" formControlName = "username">
+
+	  <br>
+	   <div *ngIf="!formName.controls.invalid" class="alert alert-danger">
+	   
+	   
+	   
+       </div>
+	  <input type="text" class="form-control" formControlName = "password">
+     
+  </div>
+  <br>
+{{ formName.value.username | json }}
+{{ formName.status.username | json }}
+
+</div>
+<br>
+   <button type="submit" class="btn btn-success">Submit</button>
+
+</form>
+</div>

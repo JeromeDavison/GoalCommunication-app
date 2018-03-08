@@ -1,0 +1,34 @@
+
+
+
+<h1> Welcome! Sign in or Register! </h1>
+
+
+<div class = "container">
+<form [formGroup] = "formName"   (ngSubmit) = "postSubmit(formName.value)">
+ 
+  <div class="form-row">
+    <div class="col-md-4">
+ <div *ngIf="!formName.controls['username'].valid && formName.controls['username'].touched" class="alert alert-danger isInvalid">
+	   <div *ngIf="!formName.controls['username'].minlength && formName.controls['username'].touched">
+          Sorry, username not long enough
+		</div>
+
+
+
+
+    </div>
+     <input type="text" class="form-control" placeholder="First name" formControlName = "username" />
+   
+	  <br>
+	  <input type="text" class="form-control" formControlName = "password" />
+  </div>
+  <br>
+
+</div>
+<br>
+<a href = "/setup">this </a>
+   <button type="submit" class="btn btn-success" [disabled] = "!formName.valid">Submit</button>
+
+</form>
+</div>
