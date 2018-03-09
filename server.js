@@ -2,30 +2,26 @@ let express = require('express');
 let cors = require('cors');
 let body = require('body-parser');
 var app = express();
+let mongoose = require('mongoose');
+ // mongoose.connect fill this shit in 
 app.use(cors())
 app.use(body.urlencoded({extended: true}));
 app.use(body.json());
 
+// Setup Middleware
 
-
-app.route('/')
-.get((req, res, next) => {
-	 res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
-	
- res.json({Tech:["First", "second", "third"],
-           Food: ["First", "second", "third"],
-		   misc:["First", "second", "third"]
-		   });
-})
-.post((req,res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+require('./routes/route')(app);
 
-})
+
+
+
+
 
 
 
