@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-require('./routes/route')(app);
+require('./routes/routes')(app);
 
 
 
