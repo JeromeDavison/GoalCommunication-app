@@ -1,11 +1,12 @@
 var passportLocalMongoose = require('passport-local-mongoose');
 var passport = require('passport');
-
+var passportlocalmongoose = require('passport-local-mongoose');
 const dbs = require('../database/dbs');
+const path = require('path');
 
 
 // use static authenticate method of model in LocalStrategy
-passport.use(Users.User.createStrategy());
+passport.use(dbs.User.createStrategy());
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(dbs.User.serializeUser());
 passport.deserializeUser(dbs.User.deserializeUser());
@@ -15,7 +16,7 @@ passport.deserializeUser(dbs.User.deserializeUser());
 module.exports = function (app){
 	//home route
 	app.get('/', (req, res) => {
-    res.sendFile(__dirname+ '/src/index.html');
+    res.sendFile(path.resolve('src/index.html'));
 
     
 });
@@ -31,12 +32,15 @@ dbs.User.register({username:req.body.username}, req.body.password, (err, succ) =
  });
 });
 
-app.post('/login', authenticate('local'), (req, res) => { //authentication for regular login 
-    res.sendFile(__dirname+ '/src/index.html');
+app.post('/login', passport.authenticate('local'), (req, res) => { //authentication for regular login 
+    res.sendFile(__dirname+ './src/index.html');
 
 });
-
-
+//retrieve goal number
+app.get('/goalnum', (req, res) => {
+    res.json({data:3});
+});
+	
 
 
 	// listUsersInGoal
@@ -83,7 +87,7 @@ app.post('/login', authenticate('local'), (req, res) => { //authentication for r
 		
 		
 		
-	)}
+	});
 	
 	
 	
@@ -119,7 +123,7 @@ app.post('/login', authenticate('local'), (req, res) => { //authentication for r
 	
 	// delete goal
 	app.post('/leaveGoal', (req, res) => {
-    dbs.Group.find({goalId:req.body.id}, (err, succ) =>
+    dbs.Group.find({goalId:req.body.id}, (err, succ) => {
 	 if (err){
 		 res.json({data:"sorry, there was no goal matching the id"});
 		 
