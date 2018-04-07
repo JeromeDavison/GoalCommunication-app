@@ -9,16 +9,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class JoingoalComponent implements OnInit {
 
   constructor(public http: HttpClient) {
-   this.requestCategories(this.url)
+   this.requestGoals();
+   console.log('siup');
    }
 
   
    // create array holding all the categories
    
-   Categories: any = {'Tech': [] , 'Food': [] ,'School' : [], 'misc': []};   /* 
+   Categories: any = {Tech: [] , Food: [] , School : [], Misc: []};   /* 
 	  
 	  Tech{[
-	  New Gadget {Name, postInfo},
+	  New Gadget {Name, postInfo, id },
 	  Recreating diagram,
 	  new Phone
 	  upgrading syntax
@@ -42,26 +43,41 @@ export class JoingoalComponent implements OnInit {
    
     requestCategories(url){
 			  this.http.get('http://127.0.0.1:3000/',this.httpOptions).subscribe(res => console.log(res)); 
-
-		 // this shit isnt tested my man!
+		
+		// this shit isnt tested my man!
 	}
    // on load use a slide fade in animation,
-    requestGoals(urlGoal){
-			 this.http.get('http://127.0.0.1:3000/goalnum',this.httpOptions).subscribe(res => res.goalNum = this.goalNum)); 
+    requestGoals(){
+			 this.http.get('http://127.0.0.1:3000/goalSearch', this.httpOptions).subscribe((res) => {
+				 this.Categories.Tech.push(res.data);
+				 console.log(res);
+				 console.log(this.Categories);
+			 })
 	}
    goalCheck(){
 	   if (this.goalCount > 3){
-		   
+		   return false;
 		   // cannot submit new goal
+	   } else {
+		   return true;
 	   }
-	  
-	   
-	
-	   
    } 
    // on click Show "Goal Joined!" mini screen and fade out.
     // render a new view ontop? or just show if something is true?
+	// ea goal has a unique id
 	
+	joinGoal(val ){
+       // make http request postSubmit
+	  this.http.post("http://127.0.0.1:3000/goalnum" , {username:val.username, password: val.password}, this.httpOptions).subscribe((res) => { console.log(res)},
+	  response => {
+  console.log(response)},
+ () => {
+	  
+	console.log("win");  
+  })
+
+	
+	}
 	
 	
    // If user has over 3 goals, direct them to the deletion option 
