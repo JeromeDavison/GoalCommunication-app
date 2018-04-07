@@ -31,7 +31,6 @@ import { RouterModule, Routes } from '@angular/router';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     InterceptorModule,
 	HttpModule,
 	FormsModule,
