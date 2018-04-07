@@ -1,31 +1,28 @@
-=
 <div class="wrapper">
 
-    <nav id="sidebar">
-        <!-- Sidebar Header -->
-        <div class="sidebar-header">
-            <h3>Collapsible Sidebar</div>
-        </div>
+	<div class = "container">
+	<div class = "row">
+    <div class = "col-md-3" *ngFor = "let t of Categories.Tech[0]" >
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title"> {{t.goal}}</h5>
+	<h4>Goal Id: </h4>
+    <p class="card-text">{{t.goalId}}</p>
+	 <div class="form-group">
+    <label for="exampleInputEmail1">Enter Id to Join</label>
+    <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Goal Id">
+    <small  class="form-text text-muted">If there are too many members you wont be able to join</small>
+  </div>
+    <a href="#" class="btn btn-primary">Join goal</a>
+  </div>
+</div>
+</div>
 
-        <!-- Sidebar Links -->
-        <ul class="list-unstyled components">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-
-            <li><!-- Link with dropdown items -->
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li><a href="#">Page</a></li>
-                    <li><a href="#">Page</a></li>
-                    <li><a href="#">Page</a></li>
-                </ul>
-
-            <li><a href="#">Portfolio</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
 
 </div>
+
+</div>
+
 
 
 
